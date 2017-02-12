@@ -11,12 +11,12 @@ class Emailer:
 
     def login(self):
         try:
-            email_addr = input('Enter your email: ')
+            self.email_addr = input('Enter your email: ')
             password = getpass.getpass()
             self.s = smtplib.SMTP('smtp.gmail.com', 587)
             self.s.ehlo()
             self.s.starttls()
-            self.s.login(email_addr, password)
+            self.s.login(self.email_addr, password)
             print ('Sucessfully logged in')
             password = 'hahahaha'
             return True
@@ -39,8 +39,9 @@ class Emailer:
         
         try:
 
-            self.s.send_mail(self.email, receiver, msg)
+            self.s.sendmail(self.email_addr, receiver, msg)
             self.s.quit()
+            print('message sent')
         except:
             print ('Error')
             
