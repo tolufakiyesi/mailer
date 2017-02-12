@@ -1,4 +1,5 @@
 import smtplib
+import getpass
 
 # Import the email modules we'll need
 from email.mime.text import MIMEText
@@ -11,14 +12,16 @@ class Emailer:
     def login(self):
         try:
             email_addr = input('Enter your email: ')
-            password = open('password.txt')
+            password = getpass.getpass()
             self.s = smtplib.SMTP('smtp.gmail.com', 587)
             self.s.ehlo()
             self.s.starttls()
-            self.s.login(email_addr, password.read())
+            self.s.login(email_addr, password)
             print ('Sucessfully logged in')
+            password = 'hahahaha'
             return True
         except:
+            password = 'hahahaha'
             print ('Login Failed')
             raise
             return False
